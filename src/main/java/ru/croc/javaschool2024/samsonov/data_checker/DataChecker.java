@@ -8,20 +8,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static ru.croc.javaschool2024.samsonov.db_consts.DBConstants.SELECTED_PARTIES_FILE_PATH;
 
 public class DataChecker {
-    private static final List<String> selectedParties = readSelectedParties();
+    private static final Set<String> selectedParties = readSelectedParties();
 
     private DataChecker() {}
 
-    private static List<String> readSelectedParties() {
+    private static Set<String> readSelectedParties() {
         Path selectedPartiesPath = Paths.get(SELECTED_PARTIES_FILE_PATH);
         try {
-            return new ArrayList<>(Files.readAllLines(selectedPartiesPath));
+            return new HashSet<>(Files.readAllLines(selectedPartiesPath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

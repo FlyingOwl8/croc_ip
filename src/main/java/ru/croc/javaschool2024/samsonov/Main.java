@@ -1,7 +1,7 @@
 package ru.croc.javaschool2024.samsonov;
 
 
-import ru.croc.javaschool2024.samsonov.console_handler.ConsoleHandler;
+import ru.croc.javaschool2024.samsonov.console.Console;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:h2:" + DATABASE_FILE_PATH, "samsav", "")) {
-            ConsoleHandler console = new ConsoleHandler(connection);
+            Console console = new Console(connection);
             console.startWork();
 
         } catch (SQLException e) {

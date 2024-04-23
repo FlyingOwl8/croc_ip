@@ -7,7 +7,6 @@ import ru.croc.javaschool2024.samsonov.data_checker.check_result.CheckResult;
 
 @RequiredArgsConstructor
 @Getter
-@ToString
 public class PersonData {
     private final Integer id;
     private final String fullName;
@@ -16,4 +15,11 @@ public class PersonData {
     private final boolean foreignCitizenship;
     private final String educationDocument;
     private final boolean convicted;
+
+    @Override
+    public String toString() {
+        return String.format("ID=%d, ФИО='%s', паспортные данные='%s', возраст=%d, " +
+                "имеет гражданство другой страны=%b, документ об образовании='%s', имеет судимость=%b",
+                id, fullName, passport, age, foreignCitizenship, educationDocument, convicted);
+    }
 }

@@ -1,4 +1,4 @@
-package ru.croc.javaschool2024.samsonov.console_handler;
+package ru.croc.javaschool2024.samsonov.console;
 
 import ru.croc.javaschool2024.samsonov.dto.Candidate;
 import ru.croc.javaschool2024.samsonov.dto.PersonData;
@@ -10,11 +10,11 @@ import java.sql.Connection;
 import java.util.*;
 
 
-public class ConsoleHandler {
+public class Console {
     private final Scanner scanner;
     private final Service service;
 
-    public ConsoleHandler(Connection connection) {
+    public Console(Connection connection) {
         service = new Service(connection);
         scanner = new Scanner(System.in);
     }

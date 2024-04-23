@@ -17,7 +17,6 @@ import static ru.croc.javaschool2024.samsonov.db_consts.DBConstants.*;
 
 @RequiredArgsConstructor
 @Getter
-@ToString
 public class Request {
     private final Integer id;
     private final PersonData personData;
@@ -25,4 +24,11 @@ public class Request {
     private final String party;
     private final Map<String, Integer> signs;
     private final String status;
+
+    @Override
+    public String toString() {
+        return String.format("ID=%d, личные данные={%s}, самовыдвиженец=%b, партия=%s, " +
+                        "подписи=%s, статус заявки='%s'",
+                id, personData, selfNominated, party, signs, status);
+    }
 }
