@@ -1,11 +1,12 @@
 package ru.croc.javaschool2024.samsonov.dto;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 import java.util.Map;
 
 @RequiredArgsConstructor
+@Getter
 public class Candidate {
     private final int id;
     private final int requestId;
@@ -16,8 +17,7 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return String.format("ID=%d, ID заявки=%d, ID выдвиженца=%d, самовыдвиженец=%b, партия=%s, " +
-                        "подписи=%s",
+        return String.format("ID=%d, ID заявки=%d, ID выдвиженца=%d, самовыдвиженец=%b, партия=%s, подписи=%s",
                 id, requestId, personId, selfNominated, party, signs);
     }
 }
