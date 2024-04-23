@@ -25,7 +25,7 @@ public class Service {
             dao.createTables();
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -35,59 +35,64 @@ public class Service {
             dao.createRequest(request);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public Request getRequestByPassport(String passport) {
         if (passport.isBlank()) {
-            throw new IllegalArgumentException("Паспортные данные не могут быть пустой строкой");
+            throw new ServiceException("Паспортные данные не могут быть пустой строкой");
         }
         try {
             return dao.getRequestByPassport(passport);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public PersonData getPersonDataById(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID должен быть положительным числом");
+            throw new ServiceException("ID должен быть положительным числом");
         }
         try {
             return dao.getPersonDataById(id);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public void deleteRequest(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID должен быть положительным числом");
+            throw new ServiceException("ID должен быть положительным числом");
         }
         try {
             dao.deleteRequest(id);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public List<Request> getAllRequests() {
-        return dao.getAllRequests();
+        try {
+            return dao.getAllRequests();
+        }
+        catch (DAOException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     public void checkRequestAndUpdateStatus(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID должен быть положительным числом");
+            throw new ServiceException("ID должен быть положительным числом");
         }
         try {
             dao.checkRequestAndUpdateStatus(id);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -96,7 +101,7 @@ public class Service {
             dao.checkAllUncheckedRequestsAndUpdateStatus();
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -105,43 +110,43 @@ public class Service {
             return dao.getRegisteredCandidates();
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public int getCandidateIdByPassport(String passport) {
         if (passport.isBlank()) {
-            throw new IllegalArgumentException("Паспортные данные не могут быть пустой строкой");
+            throw new ServiceException("Паспортные данные не могут быть пустой строкой");
         }
         try {
             return dao.getCandidateIdByPassport(passport);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public void deleteCandidate(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID должен быть положительным числом");
+            throw new ServiceException("ID должен быть положительным числом");
         }
         try {
             dao.deleteCandidate(id);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     public String getRefusalReasonByRequestId(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID должен быть положительным числом");
+            throw new ServiceException("ID должен быть положительным числом");
         }
         try {
             return dao.getRefusalReasonByRequestId(id);
         }
         catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 

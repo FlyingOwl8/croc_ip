@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22f579b9-bb6b-4ca1-b2cd-185461c0e387" name="Changes" comment="Проверка данных и работа с консолью вынесены в отдельные классы">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/exception/DAOException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/exception/ServiceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/console_handler/ConsoleHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/console_handler/ConsoleHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dao/DAO.java" afterDir="false" />
+    <list default="true" id="22f579b9-bb6b-4ca1-b2cd-185461c0e387" name="Changes" comment="Добавлен сервисный слой, кастомные исключения">
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/service/Service.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +103,7 @@
       <workItem from="1713658367141" duration="2142000" />
       <workItem from="1713736695776" duration="614000" />
       <workItem from="1713801471670" duration="35982000" />
-      <workItem from="1713867998716" duration="1201000" />
+      <workItem from="1713867998716" duration="1605000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -126,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713834830527</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Добавлен сервисный слой, кастомные исключения">
+      <option name="closed" value="true" />
+      <created>1713869381199</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713869381199</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +138,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="Проверка данных и работа с консолью вынесены в отдельные классы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Проверка данных и работа с консолью вынесены в отдельные классы" />
+    <MESSAGE value="Добавлен сервисный слой, кастомные исключения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен сервисный слой, кастомные исключения" />
   </component>
 </project>
