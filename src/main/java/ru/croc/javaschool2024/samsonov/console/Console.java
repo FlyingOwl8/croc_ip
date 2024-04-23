@@ -9,7 +9,7 @@ import ru.croc.javaschool2024.samsonov.service.Service;
 import java.sql.Connection;
 import java.util.*;
 
-
+//класс для взаимодействия с пользователем через консоль
 public class Console {
     private final Scanner scanner;
     private final Service service;
@@ -19,6 +19,7 @@ public class Console {
         scanner = new Scanner(System.in);
     }
 
+    //начало работы
     public void startWork() {
         try {
             service.createTables();
@@ -108,6 +109,7 @@ public class Console {
         }
     }
 
+    //создать заявку
     private void createRequest() {
         String fullName;
         String passport;
@@ -175,6 +177,7 @@ public class Console {
         }
     }
 
+    //получить данные заявки по паспорту
     private void getRequestByPassport() {
         String passport;
         try {
@@ -196,6 +199,7 @@ public class Console {
         }
     }
 
+    //получить личные данные по ID выдвиженца
     private void getPersonDataByPersonId() {
         int id;
         try {
@@ -215,6 +219,7 @@ public class Console {
         }
     }
 
+    //удалить заявку по ID заявки
     private void deleteRequestByRequestId() {
         int id;
         try {
@@ -233,6 +238,7 @@ public class Console {
         }
     }
 
+    //получить все заявки
     private void getAllRequests() {
         try {
             List<Request> requestList = service.getAllRequests();
@@ -244,6 +250,7 @@ public class Console {
         }
     }
 
+    //проверить заявку по ID заявки
     private void checkRequestById() {
         int id;
         try {
@@ -262,6 +269,7 @@ public class Console {
         }
     }
 
+    //проверить все непроверенные заявки
     private void checkAllUncheckedRequests() {
         try {
             service.checkAllUncheckedRequestsAndUpdateStatus();
@@ -272,6 +280,7 @@ public class Console {
         }
     }
 
+    //получить данные всех зарегистрированных кандидатов
     private void getAllRegisteredCandidates() {
         try {
             List<Candidate> candidateList = service.getRegisteredCandidates();
@@ -285,6 +294,7 @@ public class Console {
         }
     }
 
+    //получить ID кандидата по паспорту
     private void getCandidateIdByPassport() {
         String passport;
         try {
@@ -304,6 +314,7 @@ public class Console {
         }
     }
 
+    //удалить кандидата по ID кандидата
     private void deleteCandidateByCandidateId() {
         int id;
         try {
@@ -322,6 +333,7 @@ public class Console {
         }
     }
 
+    //получить причину отказа в регистрации по ID заявки
     private void getRefusalReasonByRequestId() {
         int id;
         try {
