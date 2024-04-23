@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Objects;
 
+//класс сервиса
 @RequiredArgsConstructor
 public class Service {
     private final DAO dao;
@@ -20,6 +21,7 @@ public class Service {
         dao = new DAO(connection);
     }
 
+    //создать таблицы
     public void createTables() {
         try {
             dao.createTables();
@@ -29,6 +31,7 @@ public class Service {
         }
     }
 
+    //создать заявку
     public void createRequest(Request request) {
         validateRequest(request);
         try {
@@ -39,6 +42,7 @@ public class Service {
         }
     }
 
+    //получить данные заявки по паспорту
     public Request getRequestByPassport(String passport) {
         if (passport.isBlank()) {
             throw new ServiceException("Паспортные данные не могут быть пустой строкой");
@@ -51,6 +55,7 @@ public class Service {
         }
     }
 
+    //получить личные данные по ID выдвиженца
     public PersonData getPersonDataById(int id) {
         if (id <= 0) {
             throw new ServiceException("ID должен быть положительным числом");
@@ -63,6 +68,7 @@ public class Service {
         }
     }
 
+    //удалить заявку по ID заявки
     public void deleteRequest(int id) {
         if (id <= 0) {
             throw new ServiceException("ID должен быть положительным числом");
@@ -75,6 +81,7 @@ public class Service {
         }
     }
 
+    //получить все заявки
     public List<Request> getAllRequests() {
         try {
             return dao.getAllRequests();
@@ -84,6 +91,7 @@ public class Service {
         }
     }
 
+    //проверить заявку по ID заявки
     public void checkRequestAndUpdateStatus(int id) {
         if (id <= 0) {
             throw new ServiceException("ID должен быть положительным числом");
@@ -96,6 +104,7 @@ public class Service {
         }
     }
 
+    //проверить все непроверенные заявки
     public void checkAllUncheckedRequestsAndUpdateStatus() {
         try {
             dao.checkAllUncheckedRequestsAndUpdateStatus();
@@ -105,6 +114,7 @@ public class Service {
         }
     }
 
+    //получить данные всех зарегистрированных кандидатов
     public List<Candidate> getRegisteredCandidates() {
         try {
             return dao.getRegisteredCandidates();
@@ -114,6 +124,7 @@ public class Service {
         }
     }
 
+    //получить ID кандидата по паспорту
     public int getCandidateIdByPassport(String passport) {
         if (passport.isBlank()) {
             throw new ServiceException("Паспортные данные не могут быть пустой строкой");
@@ -126,6 +137,7 @@ public class Service {
         }
     }
 
+    //удалить кандидата по ID кандидата
     public void deleteCandidate(int id) {
         if (id <= 0) {
             throw new ServiceException("ID должен быть положительным числом");
@@ -138,6 +150,7 @@ public class Service {
         }
     }
 
+    //получить причину отказа в регистрации по ID заявки
     public String getRefusalReasonByRequestId(int id) {
         if (id <= 0) {
             throw new ServiceException("ID должен быть положительным числом");
@@ -150,6 +163,7 @@ public class Service {
         }
     }
 
+    //проверить валидность данных заявки
     private void validateRequest(Request request) {
         validatePersonData(request.getPersonData());
         if (!request.isSelfNominated() && (request.getParty() == null || request.getParty().isBlank())) {
@@ -169,6 +183,7 @@ public class Service {
         }
     }
 
+    //проверить валидность личных данных
     private void validatePersonData(PersonData personData) {
         if (personData.getFullName().isBlank()) {
             throw new ServiceException("ФИО не может быть пустой строкой");

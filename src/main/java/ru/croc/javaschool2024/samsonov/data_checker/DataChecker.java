@@ -13,6 +13,7 @@ import java.util.Set;
 
 import static ru.croc.javaschool2024.samsonov.db_consts.DBConstants.SELECTED_PARTIES_FILE_PATH;
 
+//класс проверки данных для регистрации
 public class DataChecker {
     private static final Set<String> selectedParties = readSelectedParties();
 
@@ -27,6 +28,7 @@ public class DataChecker {
         }
     }
 
+    //проверить личные данные
     public static CheckResult checkPersonData(PersonData personData) {
         if (personData.getAge() < 35) {
             return new CheckResult(false, "Возраст меньше 35 лет");
@@ -40,6 +42,7 @@ public class DataChecker {
         return new CheckResult(true, null);
     }
 
+    //проверить данные заявки
     public static CheckResult checkRequest(Request request) {
         CheckResult personDataCheckResult = checkPersonData(request.getPersonData());
         if (!personDataCheckResult.result()) {

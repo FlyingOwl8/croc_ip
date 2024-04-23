@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'ru.mts'
+group = 'ru.croc.javaschool2024.samsonov'
 version = '1.0-SNAPSHOT'
 
 repositories {
