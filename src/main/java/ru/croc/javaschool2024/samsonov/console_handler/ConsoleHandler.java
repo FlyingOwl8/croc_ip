@@ -1,9 +1,10 @@
 package ru.croc.javaschool2024.samsonov.console_handler;
 
-import ru.croc.javaschool2024.samsonov.dao.DAO;
 import ru.croc.javaschool2024.samsonov.dto.Candidate;
 import ru.croc.javaschool2024.samsonov.dto.PersonData;
 import ru.croc.javaschool2024.samsonov.dto.Request;
+import ru.croc.javaschool2024.samsonov.exception.ServiceException;
+import ru.croc.javaschool2024.samsonov.service.Service;
 
 import java.sql.Connection;
 import java.util.*;
@@ -11,20 +12,18 @@ import java.util.*;
 
 public class ConsoleHandler {
     private final Scanner scanner;
-    private final Connection connection;
-    private final DAO dao;
+    private final Service service;
 
     public ConsoleHandler(Connection connection) {
-        this.connection = connection;
-        dao = new DAO(connection);
+        service = new Service(connection);
         scanner = new Scanner(System.in);
     }
 
     public void startWork() {
         try {
-            dao.createTables();
+            service.createTables();
         }
-        catch (RuntimeException e) {
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
             return;
         }
@@ -110,31 +109,38 @@ public class ConsoleHandler {
     }
 
     private void createRequest() {
+        String fullName;
+        String passport;
+        int age;
+        boolean foreignCitizenship;
+        String educationDocument;
+        boolean convicted;
+        boolean selfNominated;
+        String party;
+        Map<String, Integer> signs;
+        String status;
         try {
             System.out.print("ФИО: ");
-            String fullName = scanner.nextLine();
+            fullName = scanner.nextLine();
             System.out.print("Паспорт: ");
-            String passport = scanner.nextLine();
+            passport = scanner.nextLine();
             System.out.print("Возраст: ");
-            int age = Integer.parseInt(scanner.nextLine());
+            age = Integer.parseInt(scanner.nextLine());
             System.out.print("Имеется гражданство другой страны: ");
-            boolean foreignCitizenship = Boolean.parseBoolean(scanner.nextLine());
+            foreignCitizenship = Boolean.parseBoolean(scanner.nextLine());
             System.out.print("Документ об образовании: ");
-            String educationDocument = scanner.nextLine();
+            educationDocument = scanner.nextLine();
             System.out.print("Имеется судимость: ");
-            boolean convicted = Boolean.parseBoolean(scanner.nextLine());
+            convicted = Boolean.parseBoolean(scanner.nextLine());
             System.out.print("Самовыдвиженец: ");
-            boolean selfNominated = Boolean.parseBoolean(scanner.nextLine());
-            String party;
+            selfNominated = Boolean.parseBoolean(scanner.nextLine());
             if (selfNominated) {
                 party = null;
-            }
-            else {
+            } else {
                 System.out.print("Партия: ");
                 party = scanner.nextLine();
             }
             System.out.print("Подписи: ");
-            Map<String, Integer> signs;
             String signsString = scanner.nextLine();
             if (!Objects.equals(signsString, "none")) {
                 signs = new HashMap<>();
@@ -148,195 +154,189 @@ public class ConsoleHandler {
             } else {
                 signs = null;
             }
-            String status = "CREATED";
-            Request request = new Request(null,
-                    new PersonData(null, fullName, passport, age, foreignCitizenship,
-                            educationDocument, convicted),
-                    selfNominated,
-                    party,
-                    signs,
-                    status
-            );
-            try {
-                dao.createRequest(request);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            status = "CREATED";
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        Request request = new Request(null,
+                new PersonData(null, fullName, passport, age, foreignCitizenship,
+                        educationDocument, convicted),
+                selfNominated,
+                party,
+                signs,
+                status
+        );
+        try {
+            service.createRequest(request);
+            System.out.println("---SUCCESS---");
+        } catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void getRequestByPassport() {
+        String passport;
         try {
             System.out.print("Паспорт: ");
-            String passport = scanner.nextLine();
-            try {
-                Request request = dao.getRequestByPassport(passport);
-                System.out.println(request);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            passport = scanner.nextLine();
         }
-        catch (Exception e) {
+        catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
+        }
+
+        try {
+            Request request = service.getRequestByPassport(passport);
+            System.out.println(request);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void getPersonDataByPersonId() {
+        int id;
         try {
             System.out.print("ID: ");
-            int id = Integer.parseInt(scanner.nextLine());
-            try {
-                PersonData personData = dao.getPersonDataById(id);
-                System.out.println(personData);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        try {
+            PersonData personData = service.getPersonDataById(id);
+            System.out.println(personData);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void deleteRequestByRequestId() {
+        int id;
         try {
             System.out.print("ID: ");
-            int id = Integer.parseInt(scanner.nextLine());
-            try {
-                dao.deleteRequest(id);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        try {
+            service.deleteRequest(id);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void getAllRequests() {
         try {
-            try {
-                List<Request> requestList = dao.getAllRequests();
-                requestList.forEach(System.out::println);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            List<Request> requestList = service.getAllRequests();
+            requestList.forEach(System.out::println);
+            System.out.println("---SUCCESS---");
         }
-        catch (Exception e) {
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void checkRequestById() {
+        int id;
         try {
             System.out.print("ID: ");
-            int id = Integer.parseInt(scanner.nextLine());
-            try {
-                dao.checkRequestAndUpdateStatus(id);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        try {
+            service.checkRequestAndUpdateStatus(id);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void checkAllUncheckedRequests() {
         try {
-            try {
-                dao.checkAllUncheckedRequestsAndUpdateStatus();
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            service.checkAllUncheckedRequestsAndUpdateStatus();
+            System.out.println("---SUCCESS---");
         }
-        catch (Exception e) {
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void getAllRegisteredCandidates() {
         try {
-            try {
-                List<Candidate> candidateList = dao.getRegisteredCandidates();
-                for (Candidate candidate: candidateList) {
-                    System.out.println(candidate);
-                }
-                System.out.println("---SUCCESS---");
+            List<Candidate> candidateList = service.getRegisteredCandidates();
+            for (Candidate candidate: candidateList) {
+                System.out.println(candidate);
             }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            System.out.println("---SUCCESS---");
         }
-        catch (Exception e) {
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void getCandidateIdByPassport() {
+        String passport;
         try {
-            try {
-                System.out.print("Паспорт: ");
-                String passport = scanner.nextLine();
-                int id = dao.getCandidateIdByPassport(passport);
-                System.out.println(id);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            System.out.print("Паспорт: ");
+            passport = scanner.nextLine();
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        try {
+            int id = service.getCandidateIdByPassport(passport);
+            System.out.println(id);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void deleteCandidateByCandidateId() {
+        int id;
         try {
             System.out.print("ID: ");
-            int id = Integer.parseInt(scanner.nextLine());
-            try {
-                dao.deleteCandidate(id);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        try {
+            service.deleteCandidate(id);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void getRefusalReasonByRequestId() {
+        int id;
         try {
             System.out.print("ID: ");
-            int id = Integer.parseInt(scanner.nextLine());
-            try {
-                dao.getRefusalReasonByRequestId(id);
-                System.out.println("---SUCCESS---");
-            }
-            catch (IllegalStateException e) {
-                System.out.println(e.getMessage());
-            }
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (RuntimeException e) {
+            System.out.println("Некорректный ввод: " + e.getMessage());
+            return;
         }
-        catch (Exception e) {
+        try {
+            String refusalReason = service.getRefusalReasonByRequestId(id);
+            System.out.println(refusalReason);
+            System.out.println("---SUCCESS---");
+        }
+        catch (ServiceException e) {
             System.out.println(e.getMessage());
         }
     }

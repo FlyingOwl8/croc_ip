@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22f579b9-bb6b-4ca1-b2cd-185461c0e387" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/console_handler/ConsoleHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/data_checker/DataChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="22f579b9-bb6b-4ca1-b2cd-185461c0e387" name="Changes" comment="Проверка данных и работа с консолью вынесены в отдельные классы">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/exception/DAOException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/exception/ServiceException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/service/Service.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/check_result/CheckResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/data_checker/check_result/CheckResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/console_handler/ConsoleHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/console_handler/ConsoleHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dao/DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dto/PersonData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dto/PersonData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dto/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/croc/javaschool2024/samsonov/dto/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,28 +41,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Gradle.croc_ip [:Main.main()].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Gigabyte/IdeaProjects/croc_ip/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/Gigabyte/IdeaProjects/croc_ip/src/main/java/ru/croc/javaschool2024/samsonov/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.croc_ip [:Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Gigabyte/IdeaProjects/croc_ip/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Gigabyte/IdeaProjects/croc_ip/src/main/java/ru/croc/javaschool2024/samsonov/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Gigabyte\IdeaProjects\croc_ip\src\main\resources" />
@@ -110,7 +107,8 @@
       <updated>1713658366003</updated>
       <workItem from="1713658367141" duration="2142000" />
       <workItem from="1713736695776" duration="614000" />
-      <workItem from="1713801471670" duration="24677000" />
+      <workItem from="1713801471670" duration="35982000" />
+      <workItem from="1713867998716" duration="1201000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -120,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713658943526</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Проверка данных и работа с консолью вынесены в отдельные классы">
+      <option name="closed" value="true" />
+      <created>1713834830527</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713834830527</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,6 +134,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="Проверка данных и работа с консолью вынесены в отдельные классы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Проверка данных и работа с консолью вынесены в отдельные классы" />
   </component>
 </project>
